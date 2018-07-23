@@ -53,7 +53,7 @@ body{
     line-height: 16px;
     padding: 5px 10px;
     border-radius: 5px;
-    border: 1px solid #fae01f;
+    border: 1px solid #6e0909;
   }
   
   #search-text {
@@ -63,7 +63,7 @@ body{
   }
   
   #search-button{
-    background: #fae01f;
+    background: #6e0909;
   }
   
   #search-button:hover{

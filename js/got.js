@@ -17,7 +17,6 @@ function successAjax(xhttp) {
   bubbleSortByNameAscending(charactersAlive);
   createCharacterDivForTheLeftSide(charactersAlive, leftSideDiv);
   activateSearchBar(userDatas);
-  console.log(charactersAlive);
 }
 
 getData('/json/characters.json', successAjax);
