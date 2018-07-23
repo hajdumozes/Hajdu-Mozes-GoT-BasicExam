@@ -61,6 +61,9 @@ function insertPortraitIntoCharacterDivContent(charactersAlive, i, characterDiv)
   var portrait = document.createElement('img');
   portrait.src = `/${charactersAlive[i].portrait}`;
   portrait.character = charactersAlive[i];
+  portrait.addEventListener('click', function clickEvent() {
+    showOneCharacter(this.character);
+  });
   characterDiv.appendChild(portrait);
 }
 
@@ -68,4 +71,67 @@ function insertCharacterNameIntoCharacterDivContent(charactersAlive, i, characte
   var name = document.createElement('p');
   name.innerHTML += `${charactersAlive[i].name}`;
   characterDiv.appendChild(name);
+}
+
+function showOneCharacter(character) {
+  var rightSideDiv = document.querySelector('.one-character');
+  deleteCharacterTemporaryIdDivIfExists(rightSideDiv);
+  var characterDiv = createCharacterDivForRightSide();
+  createTitleDivForRightSide(characterDiv);
+  createPictureDivForRightSide(character, characterDiv);
+  createNameDivForRightSide(character, characterDiv);
+  createCrestForRightSide(character, characterDiv);
+  createBioDivForRightSide(character, characterDiv);
+  rightSideDiv.appendChild(characterDiv);
+}
+
+function deleteCharacterTemporaryIdDivIfExists(rightSideDiv) {
+  if (document.querySelector('#character-temporary')) {
+    var characterTemporary = document.querySelector('#character-temporary');
+    rightSideDiv.removeChild(characterTemporary);
+  }
+}
+
+function createCharacterDivForRightSide() {
+  var characterDivForRightSide = document.createElement('div');
+  characterDivForRightSide.className = 'character-right-side';
+  characterDivForRightSide.id = 'character-temporary';
+  return characterDivForRightSide;
+}
+
+function createTitleDivForRightSide(characterDiv) {
+  var titleDivForRightSide = document.createElement('div');
+  titleDivForRightSide.className = 'title-right-side';
+  titleDivForRightSide.innerHTML = 'Game of Thrones';
+  characterDiv.appendChild(titleDivForRightSide);
+}
+
+function createPictureDivForRightSide(character, characterDiv) {
+  var pictureDivForRightSide = document.createElement('img');
+  pictureDivForRightSide.className = 'picture-right-side';
+  pictureDivForRightSide.src = `/${character.picture}`;
+  characterDiv.appendChild(pictureDivForRightSide);
+}
+
+function createNameDivForRightSide(character, characterDiv) {
+  var nameDivForRightSide = document.createElement('div');
+  nameDivForRightSide.className = 'name-right-side';
+  nameDivForRightSide.innerHTML = character.name;
+  characterDiv.appendChild(nameDivForRightSide);
+}
+
+function createCrestForRightSide(character, characterDiv) {
+  if (character.house !== '') {
+    var crestDivForRightSide = document.createElement('img');
+    crestDivForRightSide.className = 'crest-right-side';
+    crestDivForRightSide.src = `/assets/houses/${character.house}.png`;
+    characterDiv.appendChild(crestDivForRightSide);
+  }
+}
+
+function createBioDivForRightSide(character, characterDiv) {
+  var bioDivForRightSide = document.createElement('div');
+  bioDivForRightSide.className = 'bio-right-side';
+  bioDivForRightSide.innerHTML = character.bio;
+  characterDiv.appendChild(bioDivForRightSide);
 }
