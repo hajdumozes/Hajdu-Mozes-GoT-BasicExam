@@ -12,20 +12,34 @@ function getData(url, callbackFunc) {
 function successAjax(xhttp) {
   // itt a json content, benne a data változóban
   var userDatas = JSON.parse(xhttp.responseText)[2].data;
-  console.log(userDatas);
-  /*
-          Pár sorral lejebb majd ezt olvashatod:
-          IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ!
-
-          Na azokat a függvényeket ITT HÍVD MEG!
-
-          A userDatas NEM GLOBÁLIS változó, ne is tegyétek ki globálisra. Azaz TILOS!
-          Ha valemelyik függvényeteknek kell, akkor paraméterként adjátok át.
-        */
+  var charactersAlive = deleteDeadCharacters(userDatas);
+  bubbleSortByNameAscending(charactersAlive);
+  console.log(charactersAlive);
 }
 
-// Írd be a json fileod nevét/útvonalát úgy, ahogy nálad van
 getData('/json/characters.json', successAjax);
 
-// Live servert használd mindig!!!!!
-/* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
+function deleteDeadCharacters(userDatas) {
+  var charactersAlive = [];
+  for (var i = 0; i < userDatas.length; i++) {
+    if (userDatas[i].dead !== 'true') {
+      charactersAlive.push(userDatas[i]);
+    }
+  }
+  return charactersAlive;
+}
+
+function bubbleSortByNameAscending(charactersAlive) {
+  var i = charactersAlive.length - 1;
+  var change;
+  while (i > 0) {
+    change = 0;
+    for (var j = 0; j < i; j++) {
+      if (charactersAlive[j].name > charactersAlive[j + 1].name) {
+        [charactersAlive[j], charactersAlive[j + 1]] = [charactersAlive[j + 1], charactersAlive[j]];
+        change = j;
+      }
+    }
+    i = change;
+  }
+}
