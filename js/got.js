@@ -16,6 +16,7 @@ function successAjax(xhttp) {
   var leftSideDiv = document.querySelector('.character-list');
   bubbleSortByNameAscending(charactersAlive);
   createCharacterDivForTheLeftSide(charactersAlive, leftSideDiv);
+  activateSearchBar(userDatas);
   console.log(charactersAlive);
 }
 
@@ -109,7 +110,11 @@ function createTitleDivForRightSide(characterDiv) {
 function createPictureDivForRightSide(character, characterDiv) {
   var pictureDivForRightSide = document.createElement('img');
   pictureDivForRightSide.className = 'picture-right-side';
-  pictureDivForRightSide.src = `/${character.picture}`;
+  if (character.name === 'Jorah Mormont') {
+    pictureDivForRightSide.src = '/assets/pictures/jorah_mormont.jpg';
+  } else {
+    pictureDivForRightSide.src = `/${character.picture}`;
+  }
   characterDiv.appendChild(pictureDivForRightSide);
 }
 
@@ -134,4 +139,50 @@ function createBioDivForRightSide(character, characterDiv) {
   bioDivForRightSide.className = 'bio-right-side';
   bioDivForRightSide.innerHTML = character.bio;
   characterDiv.appendChild(bioDivForRightSide);
+}
+
+function activateSearchBar(charactersAlive) {
+  var searchButton = document.querySelector('#search-button');
+  searchButton.addEventListener('click', function clickEvent() {
+    searchForCharacterName(charactersAlive);
+  });
+}
+
+function searchForCharacterName(charactersAlive) {
+  var rightSideDiv = document.querySelector('.one-character');
+  var searched = document.querySelector('#search-text').value.toLowerCase();
+  var found = false;
+  var i = charactersAlive.length - 1;
+  while (i >= 0 && !found) {
+    if (searched === charactersAlive[i].name.toLowerCase()) {
+      found = true;
+      showOneCharacter(charactersAlive[i]);
+    }
+    i--;
+  }
+  if (!found) {
+    notFound(rightSideDiv);
+  }
+}
+
+function notFound(rightSideDiv) {
+  deleteCharacterTemporaryIdDivIfExists(rightSideDiv);
+  var notFoundDiv = document.createElement('div');
+  notFoundDiv.className = 'not-found';
+  notFoundDiv.id = 'character-temporary';
+  notFoundTitle(notFoundDiv);
+  notFoundImage(notFoundDiv);
+  rightSideDiv.appendChild(notFoundDiv);
+}
+
+function notFoundTitle(notFoundDiv) {
+  var titleNotFound = document.createElement('div');
+  titleNotFound.innerHTML = 'Character not found <br><br><br> Ask him';
+  notFoundDiv.appendChild(titleNotFound);
+}
+
+function notFoundImage(notFoundDiv) {
+  var imageNotFound = document.createElement('img');
+  imageNotFound.src = '/assets/site/not-found.png';
+  notFoundDiv.appendChild(imageNotFound);
 }

@@ -8,6 +8,11 @@ body{
     box-sizing:border-box;
     padding: 20px;
   }
+
+  @font-face {
+      font-family: GoT;
+      src: url(/fonts/Game\ of\ Thrones.ttf)
+  }
   .container{
     width:100%;
     min-height: 100vh;
@@ -34,7 +39,7 @@ body{
   
   .one-character{
     width: 100%;
-    background-color: black;
+    background-image: url(/assets/site/right-side.png);
     background-size: 100%;
     color: white
   }
@@ -52,7 +57,9 @@ body{
   }
   
   #search-text {
-   width:150px;
+   width:50%;
+   font-style: italic;
+   padding-left: 10%
   }
   
   #search-button{
@@ -62,12 +69,83 @@ body{
   #search-button:hover{
     cursor: pointer;
   }
+
+  #search-icon{
+      position: absolute;
+      color: rgba(70, 70, 70, 0.897);
+      right: 86%;
+      bottom: 38%
+  }
   
   .portrait{
     float: left;
-    width: 12,5%
+    width: 12.5%;
+    text-align: center;
+    transition: .5s ease;
 }
 
+.portrait img:hover {
+opacity: 0.7;
+cursor: pointer;
+}
+
+.portrait img:active{
+    opacity: 0;
+}
+
+
+.title-right-side {
+    text-align: center;
+    font-family: GoT
+}
+
+.picture-right-side {
+    width: 100%;
+    height: 100%;
+}
+
+.name-right-side {
+    float: left;
+    padding: 5% 0;
+    font-weight: bold;
+    font-size: 1.2em
+}
+
+.crest-right-side {
+    padding: 2% 0%;
+    float: right;
+}
+
+.bio-right-side {
+    padding: 0;
+    float: left;
+    font-style: italic
+}
+
+.not-found {
+    font-family: GoT;
+    text-align: center;
+    letter-spacing: 0.1em;
+    padding: 0;
+    margin: 30% auto auto auto
+}
+
+.not-found img{
+    width: 100%;
+    height: 100%;
+    margin: 10% auto
+}
+
+@media(max-width:1200px){
+    .portrait{
+      width: 25%;
+    }
+  }
+  @media(max-width:600px){
+    .portrait{
+      width: 50%;
+    }
+  }
 
   @media(min-width:1200px){
     .character-list{
@@ -87,16 +165,10 @@ body{
       bottom: 20px;
       left: 20px;
     }
+
+  .portrait{
+    float: left;
+    width: 12.5%;
+    height: 25%;
   }
-  
-  .ships-stats {
-    font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16pt;
-    padding: 10px;
-  }
-  
-  .image-not-found {
-    display: block;
-    margin: 0 auto
-  }
+}
