@@ -1,0 +1,17 @@
+1.
+CREATE DATABASE IF NOT EXISTS got 
+  DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+
+2-3.
+CREATE TABLE characters(
+    id int NOT NULL,
+    name varchar(100) NOT NULL,
+    alias varchar(50),
+    dead varchar(10),
+    portrait varchar(50),
+    picture varchar(50),
+    bio varchar(800),
+    house varchar(50),
+    organization varchar(50)
+    )
+    ENGINE="innoDB"

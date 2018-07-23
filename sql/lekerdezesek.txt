@@ -1,0 +1,35 @@
+6.
+
+a,
+SELECT house, COUNT(id) AS "Characters Alive"
+FROM `characters` 
+WHERE
+NOT house = "" AND
+NOT dead = true AND
+organization = ""
+GROUP BY house
+
+b,
+SELECT * 
+FROM `characters` 
+WHERE
+NOT dead = true AND
+bio LIKE "%hero%"
+
+c,
+SELECT * 
+FROM `characters` 
+WHERE
+organization = "nightwatch" AND
+house = "" AND
+NOT dead = true
+
+d,
+SELECT name AS Hero, Alias AS "Nick name", house AS "Big House" 
+FROM `characters` 
+WHERE
+NOT dead = true AND
+NOT house = "lannister" AND
+NOT organization = "royalguard" AND
+NOT bio LIKE "%Lannister%" AND
+NOT bio LIKE "%King's Landing%"
