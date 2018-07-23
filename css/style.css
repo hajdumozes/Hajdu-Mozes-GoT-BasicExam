@@ -63,6 +63,12 @@ body{
     cursor: pointer;
   }
   
+  .portrait{
+    float: left;
+    width: 12,5%
+}
+
+
   @media(min-width:1200px){
     .character-list{
       width: 75%;

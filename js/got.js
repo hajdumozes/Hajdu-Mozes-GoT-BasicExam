@@ -13,7 +13,9 @@ function successAjax(xhttp) {
   // itt a json content, benne a data változóban
   var userDatas = JSON.parse(xhttp.responseText)[2].data;
   var charactersAlive = deleteDeadCharacters(userDatas);
+  var leftSideDiv = document.querySelector('.character-list');
   bubbleSortByNameAscending(charactersAlive);
+  createCharacterDivForTheLeftSide(charactersAlive, leftSideDiv);
   console.log(charactersAlive);
 }
 
@@ -42,4 +44,28 @@ function bubbleSortByNameAscending(charactersAlive) {
     }
     i = change;
   }
+}
+
+function createCharacterDivForTheLeftSide(charactersAlive, leftSideDiv) {
+  for (var i = 0; i < charactersAlive.length; i++) {
+    var characterDiv = document.createElement('div');
+    characterDiv.className = 'portrait';
+    characterDiv.id = `character-portrait-${i}`;
+    insertPortraitIntoCharacterDivContent(charactersAlive, i, characterDiv);
+    insertCharacterNameIntoCharacterDivContent(charactersAlive, i, characterDiv);
+    leftSideDiv.appendChild(characterDiv);
+  }
+}
+
+function insertPortraitIntoCharacterDivContent(charactersAlive, i, characterDiv) {
+  var portrait = document.createElement('img');
+  portrait.src = `/${charactersAlive[i].portrait}`;
+  portrait.character = charactersAlive[i];
+  characterDiv.appendChild(portrait);
+}
+
+function insertCharacterNameIntoCharacterDivContent(charactersAlive, i, characterDiv) {
+  var name = document.createElement('p');
+  name.innerHTML += `${charactersAlive[i].name}`;
+  characterDiv.appendChild(name);
 }
